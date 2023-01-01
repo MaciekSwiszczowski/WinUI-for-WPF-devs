@@ -1,0 +1,100 @@
+<Window
+    x:Class="Binding.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Binding"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Pivot ItemTemplate="{StaticResource PivotItemDataTemplate}">
+        <PivotItem Padding="10" Header="BindBack">
+            <Grid
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                ColumnDefinitions="Auto,Auto"
+                ColumnSpacing="10"
+                RowDefinitions="Auto,Auto"
+                RowSpacing="10">
+
+                <TextBlock VerticalAlignment="Center" Text="Date:" />
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Text="{x:Bind TestViewModel.Date, Mode=OneWay}" />
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Modify hour:" />
+
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Text="{x:Bind TestViewModel.OnDateChanged(), BindBack=TestViewModel.OnHourModified, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+        </PivotItem>
+
+        <PivotItem Padding="10" Header="Casting">
+            <StackPanel Spacing="10">
+
+                <ComboBox x:Name="ComboBox" SelectedIndex="0">
+                    <ComboBoxItem>Casting</ComboBoxItem>
+                    <ComboBoxItem>Test</ComboBoxItem>
+                    <ComboBoxItem>1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Text="{x:Bind ((ComboBoxItem)ComboBox.SelectedItem).Content}" />
+                <TextBlock Text="{x:Bind ((ComboBoxItem)ComboBox.SelectedItem).Content.GetType()}" />
+                <TextBlock Text="{x:Bind local:ExtensionMethods.Debug(((ComboBoxItem)ComboBox.SelectedItem).Content), Mode=OneWay}" />
+                <TextBlock Text="{x:Bind local:ExtensionMethods.Debug(ComboBox.SelectedItem), Mode=OneWay}" />
+            </StackPanel>
+        </PivotItem>
+
+        <PivotItem Padding="10" Header="Event binding">
+            <StackPanel Spacing="10">
+                <TextBlock VerticalAlignment="Center" Text="Event binding example. Click to increase counter:" />
+                <Button Click="{x:Bind TestViewModel.IncreaseCountVersion1}" Content="{x:Bind TestViewModel.ClickCount, Mode=OneWay}" />
+                <Button Click="{x:Bind TestViewModel.IncreaseCountVersion2}" Content="{x:Bind TestViewModel.ClickCount, Mode=OneWay}" />
+            </StackPanel>
+        </PivotItem>
+
+        <PivotItem Padding="10" Header="Template binding">
+            <StackPanel Margin="10" Spacing="40">
+
+                <!--  Attempt to use TemplateBinding outside a ControlTemplate causes parsing error  -->
+                <!-- <TextBlock Text="{TemplateBinding Visibility}" /> -->
+
+                <TextBlock x:Name="TextBlock" Text="{x:Bind TextBlock.Visibility}" />
+
+                <TextBox
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    Text="Template binding test">
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="TextBox">
+                            <StackPanel
+                                BorderBrush="Gray"
+                                BorderThickness="1"
+                                Spacing="5">
+                                <!--  this causes xaml parsing failed exception:  -->
+                                <!-- <TextBlock Text="{TemplateBinding NonExistingProperty}" /> -->
+
+                                <TextBlock Text="{TemplateBinding Text}" />
+                                <TextBlock Text="{TemplateBinding TextBox.Text}" />
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text}" />
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=NonExistingProperty}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </TextBox.Template>
+                </TextBox>
+            </StackPanel>
+        </PivotItem>
+    </Pivot>
+</Window>

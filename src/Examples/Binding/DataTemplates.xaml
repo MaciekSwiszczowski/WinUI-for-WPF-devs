@@ -1,0 +1,11 @@
+<ResourceDictionary
+    x:Class="Binding.DataTemplates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  If you comment out InitializeComponent in code-behind, you'll get "XAML parsing failed." exception, that's because x:Bind is being used in the ResourceDictionary  -->
+    <DataTemplate x:Key="PivotItemDataTemplate" x:DataType="PivotItem">
+        <ContentPresenter Content="{x:Bind}" />
+    </DataTemplate>
+
+</ResourceDictionary>
