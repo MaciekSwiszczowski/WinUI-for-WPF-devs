@@ -41,7 +41,6 @@
 
         <PivotItem Padding="10" Header="Casting">
             <StackPanel Spacing="10">
-
                 <ComboBox x:Name="ComboBox" SelectedIndex="0">
                     <ComboBoxItem>Casting</ComboBoxItem>
                     <ComboBoxItem>Test</ComboBoxItem>
@@ -53,7 +52,7 @@
                 <TextBlock Text="{x:Bind ((ComboBoxItem)ComboBox.SelectedItem).Content}" />
                 <TextBlock Text="{x:Bind ((ComboBoxItem)ComboBox.SelectedItem).Content.GetType()}" />
                 <TextBlock Text="{x:Bind local:ExtensionMethods.Debug(((ComboBoxItem)ComboBox.SelectedItem).Content), Mode=OneWay}" />
-                <TextBlock Text="{x:Bind local:ExtensionMethods.Debug(ComboBox.SelectedItem), Mode=OneWay}" />
+                <TextBlock Text="{x:Bind local:ExtensionMethods.Debug(ComboBox.SelectedItem), Mode=OneWay}" />                
             </StackPanel>
         </PivotItem>
 
