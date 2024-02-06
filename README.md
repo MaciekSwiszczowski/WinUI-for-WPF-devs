@@ -15,7 +15,7 @@ Work in progress!
   - [1.5. Visibility and **x:Load**](#15-visibility-and-xload)
   - [1.6. Styles](#16-styles)
 
-## 1.1. Some useful links on start
+## 1.1. Some useful links on the start
 
 - [Windows App SDK download](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads)
 
@@ -33,7 +33,7 @@ Work in progress!
 
 ## 1.2. Common errors
 
-- In case of this compilations error:_`Microsoft.ui.xaml.dll is unable to load_ compilation` - edit project file, and add: `<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>`
+- In case of this compilations error:_`Microsoft.ui.xaml.dll is unable to load_ compilation` - edit the project file, and add: `<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>`
   
 - `XamlCompiler error WMC0615: Type 'TemplateBinding' used after '{' must be a Markup Extension. Error code 0x80004005.` - this is a parser error - template binding can only be used in **ControlTemplates**
 
@@ -68,7 +68,7 @@ This works for types that implement `IDictionary<string, T>` only.
 
 - [Event binding](https://learn.microsoft.com/en-us/windows/uwp/xaml-platform/x-bind-markup-extension#event-binding) - commands are not needed to handle events in view model! [Example](https://github.com/MaciekSwiszczowski/WinUI-for-WPF-devs/blob/main/src/Examples/Binding/MainWindow.xaml#:~:text=counter%3A%22%20/%3E-,%3CButton%20Click%3D%22%7Bx%3ABind%20TestViewModel.IncreaseCountVersion1%7D%22,%3D%22%7Bx%3ABind%20TestViewModel.ClickCount%2C%20Mode%3DOneWay%7D%22%20/%3E,-%3C/StackPanel%3E)
 
-- [Function binding](https://learn.microsoft.com/en-us/windows/uwp/data-binding/function-bindings) - functions can have multiple arguments, so they may not only replace converters, but also multibinding. [Supported function argument types.](https://learn.microsoft.com/en-us/windows/uwp/data-binding/function-bindings#function-arguments)
+- [Function binding](https://learn.microsoft.com/en-us/windows/uwp/data-binding/function-bindings) - functions can have multiple arguments, so they may not only replace converters but also multibinding. [Supported function argument types.](https://learn.microsoft.com/en-us/windows/uwp/data-binding/function-bindings#function-arguments)
 
 - Extension methods are supported in **function binding** too! [Example.](https://github.com/MaciekSwiszczowski/WinUI-for-WPF-devs/blob/main/src/Examples/Binding/MainWindow.xaml#:~:text=%3CTextBlock%20Text%3D%22%7Bx%3ABind%20local%3AExtensionMethods,Debug(ComboBox.SelectedItem)%2C%20Mode%3DOneWay%7D%22%20/%3E)
 
